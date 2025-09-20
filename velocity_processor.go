@@ -17,19 +17,22 @@ type VelocityProcessor struct {
 }
 
 // NewVelocityValidator creates a new VelocityProcessor with common time periods
-func NewVelocityValidator(weeklyThreshold, monthlyThreshold, yearlyThreshold int) VelocityProcessor {
+func NewVelocityValidator(periods []VelocityPeriod) VelocityProcessor {
 	return VelocityProcessor{
-		Periods: []VelocityPeriod{
-			{Duration: year, Threshold: weeklyThreshold},   // 1 week
-			{Duration: month, Threshold: monthlyThreshold}, // 1 month (30 days)
-			{Duration: week, Threshold: yearlyThreshold},   // 1 year
-		},
+		Periods: periods,
 	}
 }
 
 type VelocityPeriod struct {
 	Duration  time.Duration
 	Threshold int
+}
+
+func NewVelocityPeriod(period time.Duration, threshold int) VelocityPeriod {
+	return VelocityPeriod{
+		Duration:  period,
+		Threshold: threshold,
+	}
 }
 
 func (v VelocityProcessor) Process(_ context.Context, transactions []Transaction) map[uuid.UUID]struct{} {
