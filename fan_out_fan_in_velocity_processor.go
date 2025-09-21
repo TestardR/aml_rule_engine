@@ -1,3 +1,10 @@
+// Fan-out/Fan-in Pattern:
+// Streaming data: Continuous flow of data
+// Pipeline processing: Multiple transformation stages
+// Memory efficiency: Don't want to hold all data in memory
+// Functional approach: Clean separation of concerns
+// Scalable processing: Can handle varying data sizes
+
 package main
 
 import (
